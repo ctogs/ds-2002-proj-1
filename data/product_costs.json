@@ -1,0 +1,22 @@
+[
+  {
+    "ProductID": "SKU-100",
+    "UnitCost": 12.0
+  },
+  {
+    "ProductID": "SKU-101",
+    "UnitCost": 55.0
+  },
+  {
+    "ProductID": "SKU-102",
+    "UnitCost": 14.0
+  },
+  {
+    "ProductID": "SKU-200",
+    "UnitCost": 7.25
+  },
+  {
+    "ProductID": "SKU-300",
+    "UnitCost": 4.5
+  }
+]

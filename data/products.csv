@@ -1,0 +1,6 @@
+ProductID,ProductName,Category,SubCategory,UnitPrice
+SKU-100,Wireless Mouse,Electronics,Accessories,19.99
+SKU-101,Mechanical Keyboard,Electronics,Accessories,79.5
+SKU-102,USB-C Charger,Electronics,Power,24.0
+SKU-200,Water Bottle 1L,Home & Kitchen,Drinkware,12.75
+SKU-300,Notebook Set (3),Office,Stationery,9.99
