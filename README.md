@@ -1,16 +1,10 @@
 # ETL Data Processor - Retail Sales Data Mart
 
-## Project Overview
-
-I developed a comprehensive ETL (Extract, Transform, Load) pipeline that demonstrates data integration from multiple source systems into a dimensional data mart optimized for analytical queries. This project showcases my understanding of OLTP vs OLAP systems and how to transform transactional data into a star schema for business intelligence.
-
 ## Business Process
 
-I chose **retail sales transactions** as my business process, modeling the interaction between customers, products, and sales over time. This provides rich analytical opportunities for understanding customer behavior, product performance, and temporal sales patterns.
+I chose **retail sales transactions** as my business process, modeling the interaction between customers, products, and sales over time. The project file is located in project1.ipynb.
 
 ## Data Mart Design
-
-I implemented a **star schema** with the following components:
 
 ### Dimension Tables
 - **DimCustomer**: Customer demographics and contact information
