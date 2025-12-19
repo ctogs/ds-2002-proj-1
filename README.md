@@ -59,6 +59,4 @@ Streaming artifacts:
 - Incoming streaming drops: `project2_stream/incoming/`
 - Streaming checkpoints: `project2_stream/checkpoints/`
 
-These generated outputs are ignored by git via `.gitignore` so the repository remains clean and reproducible.
-
 
