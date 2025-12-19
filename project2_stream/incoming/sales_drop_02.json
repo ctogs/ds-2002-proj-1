@@ -1,0 +1,4 @@
+{"DateKey": 20250905, "CustomerID": "CUST-005", "ProductID": "SKU-300", "OrderID": "ORD-90005", "Quantity": 4, "UnitPrice": 9.99, "TotalAmount": 39.96}
+{"DateKey": 20250907, "CustomerID": "CUST-001", "ProductID": "SKU-101", "OrderID": "ORD-90006", "Quantity": 1, "UnitPrice": 79.5, "TotalAmount": 79.5}
+{"DateKey": 20250908, "CustomerID": "CUST-003", "ProductID": "SKU-102", "OrderID": "ORD-90007", "Quantity": 2, "UnitPrice": 24.0, "TotalAmount": 48.0}
+{"DateKey": 20250909, "CustomerID": "CUST-002", "ProductID": "SKU-200", "OrderID": "ORD-90008", "Quantity": 5, "UnitPrice": 12.75, "TotalAmount": 63.75}

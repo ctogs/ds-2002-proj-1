@@ -1,0 +1,2 @@
+{"DateKey": 20250910, "CustomerID": "CUST-004", "ProductID": "SKU-300", "OrderID": "ORD-90009", "Quantity": 2, "UnitPrice": 9.99, "TotalAmount": 19.98}
+{"DateKey": 20250910, "CustomerID": "CUST-005", "ProductID": "SKU-100", "OrderID": "ORD-90010", "Quantity": 1, "UnitPrice": 19.99, "TotalAmount": 19.99}
