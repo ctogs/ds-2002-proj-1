@@ -1,65 +1,64 @@
-# ETL Data Processor - Retail Sales Data Mart
+# Data Project 2 (Capstone) — Local PySpark Dimensional Lakehouse
 
 ## Business Process
 
-I chose **retail sales transactions** as my business process, modeling the interaction between customers, products, and sales over time. The project file is located in project1.ipynb.
+I modeled **retail sales transactions** as the business process, capturing the interaction between customers, products, and time. The Project 2 notebook is located in `project2.ipynb`.
 
-## Data Mart Design
+This implementation is a **local PySpark equivalent** of the “Databricks lakehouse” requirements (Bronze → Silver → Gold) using Spark’s batch and Structured Streaming APIs—**no Azure/Databricks required**.
 
-### Dimension Tables
-- **DimCustomer**: Customer demographics and contact information
-- **DimProduct**: Product catalog with categories and pricing
-- **DimDate**: Temporal dimension for time-based analysis
+## Dimensional Lakehouse Design (Bronze → Silver → Gold)
 
-### Fact Tables
-- **FactSales**: Core sales transaction data
-- **FactSales_Margin**: Enriched fact table with calculated gross margins
+### Gold Dimension Tables
+- **dim_date**: Date dimension for temporal analysis (sourced from local CSV)
+- **dim_customer**: Customer reference data (sourced from MySQL)
+- **dim_product**: Product reference data (sourced from MySQL)
+- **dim_category**: Product category dimension (derived from product attributes)
 
-## Data Sources Integration
+### Gold Fact Tables
+- **fact_sales**: Sales transaction fact table (conformed from streaming ingestion)
+- **fact_sales_margin**: Enriched metric table (gross margin) computed by joining sales with MongoDB product costs
 
-I successfully integrated data from **three different source systems**:
+## Required Source Systems (All Demonstrated)
 
-1. **MySQL OLTP Database**: Source customer and product tables (`src_customers`, `src_products`)
-2. **CSV Files**: Local file system containing customers, products, dates, and sales data
-3. **MongoDB**: NoSQL database storing product cost information (`product_costs`)
+This project integrates data from **three required source types**:
 
-## ETL Pipeline Implementation
+1. **MySQL (Relational / SQL)**  
+   - Source tables: `src_customers`, `src_products`  
+   - Access method: Spark **JDBC** read/write
 
-### Extract Phase
-- **SQL Database**: Extracted customer and product data from MySQL OLTP tables
-- **File System**: Loaded CSV files containing transactional and dimensional data
-- **MongoDB**: Retrieved product cost data from NoSQL collection
+2. **MongoDB (NoSQL)**  
+   - Collection: `product_costs`  
+   - Access method: `pymongo`
 
-### Transform Phase
-- **Data Integration**: Combined data from multiple sources, handling duplicates
-- **Column Modification**: Renamed and restructured columns for dimensional model
-- **Business Logic**: Calculated gross margins by joining sales data with cost information
-- **Data Quality**: Implemented deduplication and data validation
+3. **Local File System (Files)**  
+   - CSV inputs in `data/`: `dates.csv`, `sales.csv` (and additional CSVs retained from Project 1)  
+   - Streaming inputs: JSON drops written into `project2_stream/incoming/`
 
-### Load Phase
-- **Dimension Loading**: Populated customer, product, and date dimensions
-- **Fact Loading**: Created sales fact table with proper foreign key relationships
-- **Enriched Facts**: Generated margin analysis table with calculated metrics
+## Data Integration & Processing Requirements
 
-## Analytical Queries
+### 1) Batch Execution + Incremental Load (Local Equivalent)
+- **Batch execution**: A baseline batch load populates lakehouse tables.
+- **Incremental load (batch)**: The notebook appends a small incremental batch and shows the Bronze row counts increasing.
 
-I developed six comprehensive analytical queries that demonstrate:
+### 2) Near Real-Time Streaming (Mini-batches) + Bronze/Silver/Gold
+- **3 streaming intervals**: The fact data is segmented into **3 separate JSON files** and ingested as **Structured Streaming mini-batches** (local equivalent of “AutoLoader” behavior).
+- **Silver integration**: Streaming fact rows are joined to static reference dimensions (customer/product) at the **Silver** stage to illustrate the relationships between near real-time and static data.
+- **Gold publishing**: Conformed facts and dimensions are published for analytics queries.
 
-1. **Daily Revenue & Margin Analysis**: Time-series analysis of sales performance
-2. **Category Performance**: Product category analysis by date
-3. **Customer Segmentation**: Top customers by margin contribution
-4. **Temporal Patterns**: Average order value by weekday
-5. **Product Performance**: Product leaderboard by units, revenue, and margin
-6. **Monthly Rollups**: Aggregated metrics by year/month
+### 3) Business Value / Analytics
+The notebook includes analytical queries that aggregate revenue and gross margin by time, category, and customer using the Gold star schema tables.
 
-Each query joins 3+ tables and includes aggregation functions (SUM, COUNT, AVG) with GROUP BY operations.
+## Output Artifacts
 
-## Deployment Strategy
+The notebook writes local lakehouse outputs to:
+- `project2_lakehouse/bronze/`
+- `project2_lakehouse/silver/`
+- `project2_lakehouse/gold/`
 
-The solution is designed for **local development and testing**:
+Streaming artifacts:
+- Incoming streaming drops: `project2_stream/incoming/`
+- Streaming checkpoints: `project2_stream/checkpoints/`
 
-1. **Database Setup**: MySQL database with configured connection parameters
-2. **MongoDB Setup**: Local MongoDB instance for NoSQL data storage
-3. **Data Preparation**: CSV files and JSON data prepared in `/data` directory
-4. **Execution**: Jupyter notebook provides interactive ETL pipeline execution
-5. **Validation**: Analytical queries verify data integrity and business logic
+These generated outputs are ignored by git via `.gitignore` so the repository remains clean and reproducible.
+
+
