@@ -4,8 +4,6 @@
 
 I modeled **retail sales transactions** as the business process, capturing the interaction between customers, products, and time. The Project 2 notebook is located in `project2.ipynb`.
 
-This implementation is a **local PySpark equivalent** of the “Databricks lakehouse” requirements (Bronze → Silver → Gold) using Spark’s batch and Structured Streaming APIs.
-
 ## Dimensional Lakehouse Design (Bronze → Silver → Gold)
 
 ### Gold Dimension Tables
