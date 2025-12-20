@@ -4,15 +4,13 @@
 
 I modeled **retail sales transactions** as the business process, capturing the interaction between customers, products, and time. The Project 2 notebook is located in `project2.ipynb`.
 
-This implementation is a **local PySpark equivalent** of the “Databricks lakehouse” requirements (Bronze → Silver → Gold) using Spark’s batch and Structured Streaming APIs—**no Azure/Databricks required**.
-
 ## Dimensional Lakehouse Design (Bronze → Silver → Gold)
 
 ### Gold Dimension Tables
-- **dim_date**: Date dimension for temporal analysis (sourced from local CSV)
-- **dim_customer**: Customer reference data (sourced from MySQL)
-- **dim_product**: Product reference data (sourced from MySQL)
-- **dim_category**: Product category dimension (derived from product attributes)
+- **dim_date**: Date dimension for temporal analysis
+- **dim_customer**: Customer reference data 
+- **dim_product**: Product reference data 
+- **dim_category**: Product category dimension
 
 ### Gold Fact Tables
 - **fact_sales**: Sales transaction fact table (conformed from streaming ingestion)
